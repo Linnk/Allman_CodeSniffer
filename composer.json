@@ -1,0 +1,17 @@
+{
+    "name": "linnk/allman-codesniffer",
+    "description": "AllmanP CodeSniffer & Linnk Standards",
+    "type": "library",
+    "keywords": ["framework", "codesniffer"],
+    "homepage": "http://lionwriter.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Juan I. Benavides",
+            "homepage": "https://github.com/linnk/allman-codesniffer"
+        }
+    ],
+    "require": {
+        "squizlabs/php_codesniffer": "2.6.2"
+    }
+}
