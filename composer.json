@@ -1,6 +1,6 @@
 {
     "name": "linnk/allman-codesniffer",
-    "description": "AllmanP CodeSniffer & Linnk Standards",
+    "description": "Allman CodeSniffer & Linnk Standards",
     "type": "library",
     "keywords": ["framework", "codesniffer"],
     "homepage": "http://lionwriter.com",
