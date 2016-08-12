@@ -6,11 +6,11 @@
 		<exclude name="PSR1.Classes.ClassDeclaration"/>
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 		<exclude name="Squiz.ControlStructures.ControlSignature"/>
-    </rule>
+	</rule>
 
 	<rule ref="PSR1.Methods.CamelCapsMethodName">
 		<exclude-pattern>*/Controller/*</exclude-pattern>
 		<exclude-pattern>*/tests/*</exclude-pattern>
-    </rule>
+	</rule>
 
 </ruleset>

@@ -42,17 +42,17 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
     public function register()
     {
         return array(
-                T_TRY,
-                T_CATCH,
-                T_DO,
-                T_WHILE,
-                T_FOR,
-                T_IF,
-                T_FOREACH,
-                T_ELSE,
-                T_ELSEIF,
-                T_SWITCH,
-               );
+            T_TRY,
+            T_CATCH,
+            T_DO,
+            T_WHILE,
+            T_FOR,
+            T_IF,
+            T_FOREACH,
+            T_ELSE,
+            T_ELSEIF,
+            T_SWITCH,
+        );
 
     }//end register()
 
@@ -86,11 +86,11 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
             }
         }
 
-		$newline_after = array(
-			T_DO => T_DO,
-			T_ELSE => T_ELSE,
-			T_TRY => T_TRY,
-		);
+        $newline_after = array(
+            T_DO => T_DO,
+            T_ELSE => T_ELSE,
+            T_TRY => T_TRY,
+        );
         if ($found !== 1 && !isset($newline_after[$tokens[$stackPtr]['code']])) {
             $error = 'Expected 1 space after %s keyword; %s found';
             $data  = array(
@@ -107,7 +107,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
                 }
             }
         }
-		else if ($found !== 'newline' && isset($newline_after[$tokens[$stackPtr]['code']])) {
+        else if ($found !== 'newline' && isset($newline_after[$tokens[$stackPtr]['code']])) {
             $error = 'Expected a newline after %s keyword';
             $data  = array(strtoupper($tokens[$stackPtr]['content']));
 
@@ -130,7 +130,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
                 $found = '"'.str_replace($phpcsFile->eolChar, '\n', $content).'"';
 
                 $fix = $phpcsFile->addFixableError($error, $closer, 'NewLineAfterCloseParenthesis', array($found));
-				if ($fix === true) {
+                if ($fix === true) {
                     $phpcsFile->fixer->addContent($closer, "\n");
                 }
             }//end if
@@ -238,11 +238,8 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
             $data  = array($found);
             $fix   = $phpcsFile->addFixableError($error, $closer, 'NewlineAfterCloseBrace', $data);
             if ($fix === true) {
-                $phpcsFile->fixer->addContent($closer, "\n")	;
+                $phpcsFile->fixer->addContent($closer, "\n");
             }
         }
-
-    }//end process()
-
-
-}//end class
+    } // end process()
+} // end class
