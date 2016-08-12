@@ -53,7 +53,6 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
             T_ELSEIF,
             T_SWITCH,
         );
-
     }//end register()
 
 
@@ -70,18 +69,25 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (isset($tokens[($stackPtr + 1)]) === false) {
+        if (isset($tokens[($stackPtr + 1)]) === false)
+        {
             return;
         }
 
         // Single space after the keyword.
         $found = 1;
-        if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE) {
+        if ($tokens[($stackPtr + 1)]['code'] !== T_WHITESPACE)
+        {
             $found = 0;
-        } else if ($tokens[($stackPtr + 1)]['content'] !== ' ') {
-            if (strpos($tokens[($stackPtr + 1)]['content'], $phpcsFile->eolChar) !== false) {
+        }
+        elseif ($tokens[($stackPtr + 1)]['content'] !== ' ')
+        {
+            if (strpos($tokens[($stackPtr + 1)]['content'], $phpcsFile->eolChar) !== false)
+            {
                 $found = 'newline';
-            } else {
+            }
+            else
+            {
                 $found = strlen($tokens[($stackPtr + 1)]['content']);
             }
         }
@@ -91,7 +97,8 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
             T_ELSE => T_ELSE,
             T_TRY => T_TRY,
         );
-        if ($found !== 1 && !isset($newline_after[$tokens[$stackPtr]['code']])) {
+        if ($found !== 1 && !isset($newline_after[$tokens[$stackPtr]['code']]))
+        {
             $error = 'Expected 1 space after %s keyword; %s found';
             $data  = array(
                       strtoupper($tokens[$stackPtr]['content']),
@@ -99,20 +106,26 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
                      );
 
             $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfterKeyword', $data);
-            if ($fix === true) {
-                if ($found === 0) {
+            if ($fix === true)
+            {
+                if ($found === 0)
+                {
                     $phpcsFile->fixer->addContent($stackPtr, ' ');
-                } else {
+                }
+                else
+                {
                     $phpcsFile->fixer->replaceToken(($stackPtr + 1), ' ');
                 }
             }
         }
-        else if ($found !== 'newline' && isset($newline_after[$tokens[$stackPtr]['code']])) {
+        elseif ($found !== 'newline' && isset($newline_after[$tokens[$stackPtr]['code']]))
+        {
             $error = 'Expected a newline after %s keyword';
             $data  = array(strtoupper($tokens[$stackPtr]['content']));
 
             $fix = $phpcsFile->addFixableError($error, $stackPtr, 'NewlineAfterKeyword', $data);
-            if ($fix === true) {
+            if ($fix === true)
+            {
                 $phpcsFile->fixer->addContent($stackPtr, "\n");
             }
         }
@@ -120,32 +133,38 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
         // Single space after closing parenthesis.
         if (isset($tokens[$stackPtr]['parenthesis_closer']) === true
             && isset($tokens[$stackPtr]['scope_opener']) === true
-        ) {
+        )
+        {
             $closer  = $tokens[$stackPtr]['parenthesis_closer'];
             $opener  = $tokens[$stackPtr]['scope_opener'];
             $content = $phpcsFile->getTokensAsString(($closer + 1), ($opener - $closer - 1));
 
-            if (strpos($content, $phpcsFile->eolChar) !== 0) {
+            if (strpos($content, $phpcsFile->eolChar) !== 0)
+            {
                 $error = 'Expected a new line after closing parenthesis; found %s';
                 $found = '"'.str_replace($phpcsFile->eolChar, '\n', $content).'"';
 
                 $fix = $phpcsFile->addFixableError($error, $closer, 'NewLineAfterCloseParenthesis', array($found));
-                if ($fix === true) {
+                if ($fix === true)
+                {
                     $phpcsFile->fixer->addContent($closer, "\n");
                 }
             }//end if
         }//end if
 
         // Single newline after opening brace.
-        if (isset($tokens[$stackPtr]['scope_opener']) === true) {
+        if (isset($tokens[$stackPtr]['scope_opener']) === true)
+        {
             $opener = $tokens[$stackPtr]['scope_opener'];
-            for ($next = ($opener + 1); $next < $phpcsFile->numTokens; $next++) {
+            for ($next = ($opener + 1); $next < $phpcsFile->numTokens; $next++)
+            {
                 $code = $tokens[$next]['code'];
 
                 if ($code === T_WHITESPACE
                     || ($code === T_INLINE_HTML
                     && trim($tokens[$next]['content']) === '')
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -153,7 +172,8 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
                 if ($tokens[$next]['line'] === $tokens[$opener]['line']
                     && (isset(PHP_CodeSniffer_Tokens::$emptyTokens[$code]) === true
                     || $code === T_CLOSE_TAG)
-                ) {
+                )
+                {
                     continue;
                 }
 
@@ -162,13 +182,17 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
                 break;
             }//end for
 
-            if ($tokens[$next]['line'] === $tokens[$opener]['line']) {
+            if ($tokens[$next]['line'] === $tokens[$opener]['line'])
+            {
                 $error = 'Newline required after opening brace';
                 $fix   = $phpcsFile->addFixableError($error, $opener, 'NewlineAfterOpenBrace');
-                if ($fix === true) {
+                if ($fix === true)
+                {
                     $phpcsFile->fixer->beginChangeset();
-                    for ($i = ($opener + 1); $i < $next; $i++) {
-                        if (trim($tokens[$i]['content']) !== '') {
+                    for ($i = ($opener + 1); $i < $next; $i++)
+                    {
+                        if (trim($tokens[$i]['content']) !== '')
+                        {
                             break;
                         }
 
@@ -180,64 +204,87 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
                     $phpcsFile->fixer->endChangeset();
                 }
             }//end if
-        } else if ($tokens[$stackPtr]['code'] === T_WHILE) {
+        }
+        elseif ($tokens[$stackPtr]['code'] === T_WHILE)
+        {
             // Zero spaces after parenthesis closer.
             $closer = $tokens[$stackPtr]['parenthesis_closer'];
             $found  = 0;
-            if ($tokens[($closer + 1)]['code'] === T_WHITESPACE) {
-                if (strpos($tokens[($closer + 1)]['content'], $phpcsFile->eolChar) !== false) {
+            if ($tokens[($closer + 1)]['code'] === T_WHITESPACE)
+            {
+                if (strpos($tokens[($closer + 1)]['content'], $phpcsFile->eolChar) !== false)
+                {
                     $found = 'newline';
-                } else {
+                }
+                else
+                {
                     $found = strlen($tokens[($closer + 1)]['content']);
                 }
             }
 
-            if ($found !== 0) {
+            if ($found !== 0)
+            {
                 $error = 'Expected 0 spaces before semicolon; %s found';
                 $data  = array($found);
                 $fix   = $phpcsFile->addFixableError($error, $closer, 'SpaceBeforeSemicolon', $data);
-                if ($fix === true) {
+                if ($fix === true)
+                {
                     $phpcsFile->fixer->replaceToken(($closer + 1), '');
                 }
             }
         }//end if
 
         // Only want to check multi-keyword structures from here on.
-        if ($tokens[$stackPtr]['code'] === T_DO) {
-            if (isset($tokens[$stackPtr]['scope_closer']) === false) {
+        if ($tokens[$stackPtr]['code'] === T_DO)
+        {
+            if (isset($tokens[$stackPtr]['scope_closer']) === false)
+            {
                 return;
             }
 
             $closer = $tokens[$stackPtr]['scope_closer'];
-        } else if ($tokens[$stackPtr]['code'] === T_ELSE
+        }
+        elseif ($tokens[$stackPtr]['code'] === T_ELSE
             || $tokens[$stackPtr]['code'] === T_ELSEIF
             || $tokens[$stackPtr]['code'] === T_CATCH
-        ) {
+        )
+        {
             $closer = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$emptyTokens, ($stackPtr - 1), null, true);
-            if ($closer === false || $tokens[$closer]['code'] !== T_CLOSE_CURLY_BRACKET) {
+            if ($closer === false || $tokens[$closer]['code'] !== T_CLOSE_CURLY_BRACKET)
+            {
                 return;
             }
-        } else {
+        }
+        else
+        {
             return;
         }
 
         // Single space after closing brace.
         $found = 1;
-        if ($tokens[($closer + 1)]['code'] !== T_WHITESPACE) {
+        if ($tokens[($closer + 1)]['code'] !== T_WHITESPACE)
+        {
             $found = 0;
-        } else if ($tokens[($closer + 1)]['content'] !== ' ') {
-            if (strpos($tokens[($closer + 1)]['content'], $phpcsFile->eolChar) !== false) {
+        }
+        elseif ($tokens[($closer + 1)]['content'] !== ' ')
+        {
+            if (strpos($tokens[($closer + 1)]['content'], $phpcsFile->eolChar) !== false)
+            {
                 $found = 'newline';
-            } else {
+            }
+            else
+            {
                 $found = strlen($tokens[($closer + 1)]['content']);
             }
         }
 
-        if ($found !== 'newline') {
+        if ($found !== 'newline')
+        {
             $error = 'Expected a newline after closing brace; %s found';
             $data  = array($found);
             $fix   = $phpcsFile->addFixableError($error, $closer, 'NewlineAfterCloseBrace', $data);
-            if ($fix === true) {
+            if ($fix === true)
+            {
                 $phpcsFile->fixer->addContent($closer, "\n");
             }
         }
