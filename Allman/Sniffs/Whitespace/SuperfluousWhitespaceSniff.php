@@ -32,32 +32,32 @@
 class Allman_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSniffer_Sniff
 {
 
-/**
- * A list of tokenizers this sniff supports.
- *
- * @var array
- */
+	/**
+	 * A list of tokenizers this sniff supports.
+	 *
+	 * @var array
+	 */
 	public $supportedTokenizers = array(
-	'PHP',
-	'JS',
-	'CSS',
+		'PHP',
+		'JS',
+		'CSS',
 	);
 
-/**
- * If TRUE, whitespace rules are not checked for blank lines.
- *
- * Blank lines are those that contain only whitespace.
- *
- * @var boolean
- */
+	/**
+	 * If TRUE, whitespace rules are not checked for blank lines.
+	 *
+	 * Blank lines are those that contain only whitespace.
+	 *
+	 * @var boolean
+	 */
 	public $ignoreBlankLines = false;
 
 
-/**
- * Returns an array of tokens this test wants to listen for.
- *
- * @return array
- */
+	/**
+	 * Returns an array of tokens this test wants to listen for.
+	 *
+	 * @return array
+	 */
 	public function register()
 	{
 		return array(
@@ -186,8 +186,8 @@ class Allman_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSni
 				}
 				// Allow a single newline at the end of the last line in the file.
 				if ($tokens[($stackPtr - 1)]['code'] !== T_WHITESPACE
-						&& $tokens[$stackPtr]['content'] === $phpcsFile->eolChar
-								   )
+					&& $tokens[$stackPtr]['content'] === $phpcsFile->eolChar
+				)
 				{
 					return;
 				}
@@ -217,14 +217,14 @@ class Allman_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSni
 			// Ignore whitespace that is not at the end of a line.
 			if (isset($tokens[($stackPtr + 1)]['line']) === true
 				&& $tokens[($stackPtr + 1)]['line'] === $tokens[$stackPtr]['line']
-					   )
+			)
 			{
 				return;
 			}
 			// Ignore blank lines if required.
 			if ($this->ignoreBlankLines === true
 				&& $tokens[($stackPtr - 1)]['line'] !== $tokens[$stackPtr]['line']
-					   )
+			)
 			{
 				return;
 			}
@@ -243,7 +243,7 @@ class Allman_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSni
 			}
 			elseif ($tokens[($stackPtr - 1)]['content'] !== rtrim($tokens[($stackPtr - 1)]['content'])
 				&& $tokens[($stackPtr - 1)]['line'] === $tokens[$stackPtr]['line']
-					   )
+			)
 			{
 				$fix = $phpcsFile->addFixableError('Whitespace found at end of line', ($stackPtr - 1), 'EndLine');
 				if ($fix === true)
