@@ -13,4 +13,11 @@
 		<exclude-pattern>*/tests/*</exclude-pattern>
 	</rule>
 
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="exact" value="true"/>
+			<property name="tabIndent" value="true"/>
+			<property name="indent" value="4"/>
+		</properties>
+	</rule>
 </ruleset>
