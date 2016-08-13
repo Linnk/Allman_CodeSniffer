@@ -41,18 +41,18 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 	public function register()
 	{
 		return array(
-		T_TRY,
-		T_CATCH,
-		T_DO,
-		T_WHILE,
-		T_FOR,
-		T_IF,
-		T_FOREACH,
-		T_ELSE,
-		T_ELSEIF,
-		T_SWITCH,
+			T_TRY,
+			T_CATCH,
+			T_DO,
+			T_WHILE,
+			T_FOR,
+			T_IF,
+			T_FOREACH,
+			T_ELSE,
+			T_ELSEIF,
+			T_SWITCH,
 		);
-	}//end register()
+	}
 
 	/**
 	 * Processes this test, when one of its tokens is encountered.
@@ -129,8 +129,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 		}
 
 		// Single space after closing parenthesis.
-		if (
-			isset($tokens[$stackPtr]['parenthesis_closer']) === true &&
+		if (isset($tokens[$stackPtr]['parenthesis_closer']) === true &&
 			isset($tokens[$stackPtr]['scope_opener']) === true
 		)
 		{
@@ -240,8 +239,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 
 			$closer = $tokens[$stackPtr]['scope_closer'];
 		}
-		elseif (
-			$tokens[$stackPtr]['code'] === T_ELSE ||
+		elseif ($tokens[$stackPtr]['code'] === T_ELSE ||
 			$tokens[$stackPtr]['code'] === T_ELSEIF ||
 			$tokens[$stackPtr]['code'] === T_CATCH
 		)

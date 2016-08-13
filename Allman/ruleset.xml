@@ -20,4 +20,5 @@
 			<property name="indent" value="4"/>
 		</properties>
 	</rule>
+
 </ruleset>
