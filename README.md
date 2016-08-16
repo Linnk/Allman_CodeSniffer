@@ -15,7 +15,13 @@ The good thing now, is that if you don't like one of those you can customize it 
 Using composer:
 
 ```
-composer require --dev "linnk/Allman_CodeSniffer=1.0"
+composer require "linnk/Allman_CodeSniffer=1.0"
+```
+
+Add the Allman standard to your phpcs copy:
+
+```
+vendor/bin/phpcs --config-set installed_paths vendor/linnk/allman-codesniffer/
 ```
 
 Usage:
