@@ -118,13 +118,16 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 		}
 		elseif ($found !== 'newline' && isset($newline_after[$tokens[$stackPtr]['code']]))
 		{
-			$error = 'Expected a newline after %s keyword';
-			$data  = array(strtoupper($tokens[$stackPtr]['content']));
-
-			$fix = $phpcsFile->addFixableError($error, $stackPtr, 'NewlineAfterKeyword', $data);
-			if ($fix === true)
+			if ($tokens[$stackPtr + 1]['content'] !== ':')
 			{
-				$phpcsFile->fixer->addContent($stackPtr, "\n");
+				$error = 'Expected a newline after %s keyword';
+				$data  = array(strtoupper($tokens[$stackPtr]['content']));
+
+				$fix = $phpcsFile->addFixableError($error, $stackPtr, 'NewlineAfterKeyword', $data);
+				if ($fix === true)
+				{
+					$phpcsFile->fixer->addContent($stackPtr, "\n");
+				}
 			}
 		}
 
