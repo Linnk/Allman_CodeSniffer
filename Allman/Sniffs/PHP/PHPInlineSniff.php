@@ -90,22 +90,30 @@ class Allman_Sniffs_PHP_PHPInlineSniff implements PHP_CodeSniffer_Sniff
 				$error = 'Not expected a newline between <?php ... ?>';
 				$phpcsFile->addError($error, $stackPtr);
 			}
-			if ($total_semicolons = substr_count($php_code, ';'))
+
+			$semicolon = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
+
+			if ($semicolon && $semicolon < $closeTag)
 			{
-				$semicolonTag = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
-
-				$error = 'Expected no semicolons inside inline code. Found: '.$total_semicolons;
-
-				if ($total_semicolons === 1)
+				$error = 'Expected no semicolons inside inline code.';
+				$tokens_in_between = $closeTag - $semicolon - 1;
+				if ($tokens_in_between <= 1)
 				{
-					if ($phpcsFile->addFixableError($error, $semicolonTag, 'SemicolonNotAllowed'))
+					if ($phpcsFile->addFixableError($error, $semicolon, 'SemicolonNotAllowed'))
 					{
-						$phpcsFile->fixer->replaceToken($semicolonTag, '');
+						if ($tokens_in_between === 1)
+						{
+							$phpcsFile->fixer->replaceToken($semicolon, '');
+						}
+						else
+						{
+							$phpcsFile->fixer->replaceToken($semicolon, ' ');
+						}
 					}
 				}
 				else
 				{
-					$phpcsFile->addError($error, $semicolonTag);
+					$phpcsFile->addError($error, $semicolon);
 				}
 			}
 			if ($tokens[$closeTag - 1]['content'] !== ' ')

@@ -120,35 +120,53 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 		{
 			if ($tokens[$stackPtr + 1]['content'] !== ':')
 			{
-				$error = 'Expected a newline after %s keyword';
-				$data  = array(strtoupper($tokens[$stackPtr]['content']));
 
-				$fix = $phpcsFile->addFixableError($error, $stackPtr, 'NewlineAfterKeyword', $data);
-				if ($fix === true)
-				{
-					$phpcsFile->fixer->addContent($stackPtr, "\n");
-				}
 			}
 		}
 
 		// Single space after closing parenthesis.
-		if (isset($tokens[$stackPtr]['parenthesis_closer']) === true &&
-			isset($tokens[$stackPtr]['scope_opener']) === true
-		)
+		if (isset($tokens[$stackPtr]['parenthesis_closer']) && isset($tokens[$stackPtr]['scope_opener']))
 		{
 			$closer  = $tokens[$stackPtr]['parenthesis_closer'];
 			$opener  = $tokens[$stackPtr]['scope_opener'];
-			$content = $phpcsFile->getTokensAsString(($closer + 1), ($opener - $closer - 1));
 
-			if (strpos($content, $phpcsFile->eolChar) !== 0)
+			if ($tokens[$opener]['type'] === 'T_COLON')
 			{
-				$error = 'Expected a new line after closing parenthesis; found %s';
-				$found = '"'.str_replace($phpcsFile->eolChar, '\n', $content).'"';
+				$tokens_between = $opener - $closer - 1;
+				$content = $phpcsFile->getTokensAsString($closer + 1, $tokens_between);
 
-				$fix = $phpcsFile->addFixableError($error, $closer, 'NewLineAfterCloseParenthesis', array($found));
-				if ($fix === true)
+				if ($content !== '')
 				{
-					$phpcsFile->fixer->addContent($closer, "\n");
+					if ($tokens_between === 1 && $tokens[$closer + 1]['type'] === 'T_WHITESPACE')
+					{
+						$error = 'Expected “:” after closing parenthesis; found “%s”';
+						$data = array(str_replace($phpcsFile->eolChar, '\n', $content));
+
+						if ($phpcsFile->addFixableError($error, $closer + 1, 'ColonAfterCloseParenthesis', $data))
+						{
+							$phpcsFile->fixer->replaceToken($closer, '');
+						}
+					}
+					elseif ($phpcsFile->addError('Expected “:” right after closing parenthesis', $closer))
+					{
+						$phpcsFile->fixer->addContent($closer, "\n");
+					}
+				}
+			}
+			else
+			{
+				$content = $phpcsFile->getTokensAsString(($closer + 1), ($opener - $closer - 1));
+
+				if (strpos($content, $phpcsFile->eolChar) !== 0)
+				{
+					$error = 'Expected a new line after closing parenthesis; found %s';
+					$found = '"'.str_replace($phpcsFile->eolChar, '\n', $content).'"';
+
+					$fix = $phpcsFile->addFixableError($error, $closer, 'NewLineAfterCloseParenthesis', array($found));
+					if ($fix === true)
+					{
+						$phpcsFile->fixer->addContent($closer, "\n");
+					}
 				}
 			}
 		}
