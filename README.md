@@ -9,6 +9,21 @@ The principles are the same, tho:
 
 The good thing now, is that if you don't like one of those you can customize it easier.
 
+
+# Installing
+
+Using composer:
+
+```
+composer require --dev "linnk/Allman_CodeSniffer=1.0"
+```
+
+Usage:
+
+```
+$ vendor/bin/phpcs --standard=Allman path/to/your/code
+```
+
 # Installation for development
 
 Clone it:
@@ -21,12 +36,6 @@ Compose it:
 
 ```
 $ composer install
-```
-
-Usage:
-
-```
-$ vendor/bin/phpcs --standard=Allman /path/to/your/code
 ```
 
 That simple.
