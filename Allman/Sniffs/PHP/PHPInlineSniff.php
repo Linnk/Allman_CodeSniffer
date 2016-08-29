@@ -41,7 +41,6 @@ class Allman_Sniffs_PHP_PHPInlineSniff implements PHP_CodeSniffer_Sniff
 	public function register()
 	{
 		return array(T_OPEN_TAG);
-
 	}
 
 	/**
@@ -60,11 +59,15 @@ class Allman_Sniffs_PHP_PHPInlineSniff implements PHP_CodeSniffer_Sniff
 
 		if (strpos($tokens[$stackPtr]['content'], PHP_EOL))
 		{
-			if ($tokens[$closeTag - 1]['content'] === PHP_EOL)
+			if (!isset($tokens[$closeTag - 1]) || $tokens[$closeTag - 1]['content'] === PHP_EOL)
+			{
 				return;
+			}
 
 			if (trim($tokens[$closeTag - 1]['content']) === '' && $tokens[$closeTag - 2]['content'] === PHP_EOL)
+			{
 				return;
+			}
 
 			$error = 'Expected a newline before %s keyword; %s found';
 			$data  = array(trim($tokens[$closeTag]['content']), $tokens[$closeTag - 1]['content']);

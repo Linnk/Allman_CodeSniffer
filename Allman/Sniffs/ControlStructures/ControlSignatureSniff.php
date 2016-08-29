@@ -120,7 +120,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 		{
 			if ($tokens[$stackPtr + 1]['content'] !== ':')
 			{
-
+				// Something I don't remember. ¯\_(ツ)_/¯
 			}
 		}
 
