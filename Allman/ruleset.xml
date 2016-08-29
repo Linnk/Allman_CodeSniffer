@@ -24,5 +24,10 @@
 	<rule ref="CakePHP.Commenting.DocBlockAlignment"/>
 	<rule ref="CakePHP.Commenting.FunctionComment"/>
 	<rule ref="CakePHP.Commenting.FunctionCommentType"/>
-
+	<rule ref="CakePHP.Formatting.BlankLineBeforeReturn"/>
+	<rule ref="CakePHP.NamingConventions.UpperCaseConstantName"/>
+	<rule ref="CakePHP.WhiteSpace.FunctionClosingBraceSpace"/>
+	<rule ref="CakePHP.WhiteSpace.FunctionOpeningBraceSpace"/>
+	<rule ref="CakePHP.WhiteSpace.ObjectOperatorSpacing"/>
+	<rule ref="CakePHP.WhiteSpace.OperatorSpacing"/>
 </ruleset>
