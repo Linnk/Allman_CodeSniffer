@@ -21,4 +21,8 @@
 		</properties>
 	</rule>
 
+	<rule ref="CakePHP.Commenting.DocBlockAlignment"/>
+	<rule ref="CakePHP.Commenting.FunctionComment"/>
+	<rule ref="CakePHP.Commenting.FunctionCommentType"/>
+
 </ruleset>
