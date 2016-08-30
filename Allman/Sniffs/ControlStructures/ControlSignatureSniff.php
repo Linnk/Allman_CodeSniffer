@@ -118,9 +118,22 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 		}
 		elseif ($found !== 'newline' && isset($newline_after[$tokens[$stackPtr]['code']]))
 		{
-			if ($tokens[$stackPtr + 1]['content'] !== ':')
+			if (isset($tokens[$stackPtr + 1]) && $tokens[$stackPtr + 1]['content'] !== ':')
 			{
-				// Something I don't remember. ¯\_(ツ)_/¯
+				$error = 'Expected a new line after keyword; found "%s"';
+				$found = str_replace($phpcsFile->eolChar, '\n', $tokens[$stackPtr + 1]['content']);
+
+				if ($phpcsFile->addFixableError($error, $stackPtr, 'NewLineAfterKeyword', array($found)))
+				{
+					if ($tokens[$stackPtr + 1]['type'] === 'T_WHITESPACE')
+					{
+						$phpcsFile->fixer->replaceToken($stackPtr + 1, "\n");
+					}
+					else
+					{
+						$phpcsFile->fixer->addContent($stackPtr + 1, "\n");
+					}
+				}
 			}
 		}
 
@@ -162,8 +175,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 					$error = 'Expected a new line after closing parenthesis; found %s';
 					$found = '"'.str_replace($phpcsFile->eolChar, '\n', $content).'"';
 
-					$fix = $phpcsFile->addFixableError($error, $closer, 'NewLineAfterCloseParenthesis', array($found));
-					if ($fix === true)
+					if ($phpcsFile->addFixableError($error, $closer, 'NewLineAfterCloseParenthesis', array($found)))
 					{
 						$phpcsFile->fixer->addContent($closer, "\n");
 					}

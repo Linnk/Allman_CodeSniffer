@@ -4,6 +4,7 @@
 
 	<rule ref="PSR2">
 		<exclude name="PSR1.Classes.ClassDeclaration"/>
+		<exclude name="PSR1.Files.SideEffects"/>
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 		<exclude name="Squiz.ControlStructures.ControlSignature"/>
 	</rule>
@@ -15,7 +16,7 @@
 
 	<rule ref="Generic.WhiteSpace.ScopeIndent">
 		<properties>
-			<property name="exact" value="true"/>
+			<property name="exact" value="false"/>
 			<property name="tabIndent" value="true"/>
 			<property name="indent" value="4"/>
 		</properties>
