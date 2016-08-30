@@ -10,27 +10,53 @@ The principles are the same, tho:
 The good thing now, is that if you don't like one of those you can customize it easier.
 
 
-# Installing
+## Install
 
 Using composer:
 
 ```
-composer require "linnk/Allman_CodeSniffer=1.0"
+composer require linnk/allman-codesniffer
 ```
 
-Add the Allman standard to your phpcs copy:
+Configuring Allman standard, you will need to add the whole path because it depends of the CakePHP standard in the repository:
 
 ```
 vendor/bin/phpcs --config-set installed_paths vendor/linnk/allman-codesniffer/
+vendor/bin/phpcs --config-set default_standard Allman
 ```
 
 Usage:
 
 ```
-$ vendor/bin/phpcs --standard=Allman path/to/your/code
+$ vendor/bin/phpcs path/to/your/code
 ```
 
-# Installation for development
+
+## Global install
+
+Using composer:
+
+```
+composer global require linnk/allman-codesniffer
+```
+
+Make sure you have ~/.composer/vendor/bin/ in your PATH, so you can run **phpcs** and **phpcbf** as a command line. Then, configure the Allman standard:
+
+```
+phpcs --config-set installed_paths ~/.composer/vendor/linnk/allman-codesniffer/
+phpcs --config-set default_standard Allman
+```
+
+If everything is ok, you can check it “explaining” the default_standard:
+
+```
+phpcs -e
+```
+
+You should see the Allman standard definition at the beginning.
+
+
+## Development
 
 Clone it:
 
@@ -44,4 +70,4 @@ Compose it:
 $ composer install
 ```
 
-That simple.
+That's it.
