@@ -12,6 +12,7 @@
 	</rule>
 
 	<rule ref="PSR1.Methods.CamelCapsMethodName">
+		<exclude-pattern>*/Console/*</exclude-pattern>
 		<exclude-pattern>*/Controller/*</exclude-pattern>
 		<exclude-pattern>*/tests/*</exclude-pattern>
 	</rule>
