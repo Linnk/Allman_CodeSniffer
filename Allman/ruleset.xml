@@ -5,6 +5,8 @@
 	<rule ref="PSR2">
 		<exclude name="PSR1.Classes.ClassDeclaration"/>
 		<exclude name="PSR1.Files.SideEffects"/>
+		<exclude name="PSR2.Classes.PropertyDeclaration"/>
+		<exclude name="PSR2.Methods.MethodDeclaration"/>
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 		<exclude name="Squiz.ControlStructures.ControlSignature"/>
 	</rule>
@@ -22,9 +24,14 @@
 		</properties>
 	</rule>
 
-	<rule ref="CakePHP.Commenting.DocBlockAlignment"/>
-	<rule ref="CakePHP.Commenting.FunctionComment"/>
-	<rule ref="CakePHP.Commenting.FunctionCommentType"/>
+	<rule ref="Squiz.Commenting.DocCommentAlignment"/>
+	<rule ref="Squiz.Commenting.ClassComment"/>
+	<rule ref="Squiz.Commenting.EmptyCatchComment"/>
+	<rule ref="Squiz.Commenting.FunctionCommentThrowTag"/>
+	<rule ref="Squiz.Commenting.InlineComment"/>
+	<rule ref="Squiz.Commenting.PostStatementComment"/>
+	<rule ref="Squiz.Commenting.VariableComment"/>
+
 	<rule ref="CakePHP.Formatting.BlankLineBeforeReturn"/>
 	<rule ref="CakePHP.NamingConventions.UpperCaseConstantName"/>
 	<rule ref="CakePHP.WhiteSpace.FunctionClosingBraceSpace"/>
