@@ -58,7 +58,7 @@ class Allman_Sniffs_WhiteSpace_TabOverSpaceSniff implements PHP_CodeSniffer_Snif
 		$spaces = substr_count($raw, ' ');
 		if ($spaces > 0)
 		{
-			$tabs = strlen($tokens[$stackPtr]['content']) / 4;
+			$tabs = round(strlen($tokens[$stackPtr]['content']) / 4);
 
 			$spaces_found = $spaces === 1 ? '1 space' : $spaces.' spaces';
 			$tabs_found = $tabs === 1 ? '1 tab' : $tabs.' tabs';
