@@ -19,15 +19,6 @@
  * Checks that no whitespace proceeds the first content of the file, exists
  * after the last content of the file, resides after content on any line, or
  * are two empty lines in functions.
- *
- * @category  PHP
- * @package   PHP_CodeSniffer
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @author    Marc McIntyre <mmcintyre@squiz.net>
- * @copyright 2006-2014 Allman Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
- * @version   Release: @package_version@
- * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 class Allman_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSniffer_Sniff
 {
@@ -86,7 +77,6 @@ class Allman_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSni
 		if ($tokens[$stackPtr]['code'] === T_OPEN_TAG)
 		{
 			// Check for start of file whitespace.
-
 			if ($phpcsFile->tokenizerType !== 'PHP')
 			{
 				// The first token is always the open tag inserted when tokenizsed
@@ -143,7 +133,6 @@ class Allman_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSni
 		elseif ($tokens[$stackPtr]['code'] === T_CLOSE_TAG)
 		{
 			// Check for end of file whitespace.
-
 			if ($phpcsFile->tokenizerType === 'PHP')
 			{
 				if (isset($tokens[($stackPtr + 1)]) === false)
@@ -253,7 +242,6 @@ class Allman_Sniffs_WhiteSpace_SuperfluousWhitespaceSniff implements PHP_CodeSni
 			}
 
 			// Check for multiple blank lines in a function.
-
 			if (($phpcsFile->hasCondition($stackPtr, T_FUNCTION) === true
 				|| $phpcsFile->hasCondition($stackPtr, T_CLOSURE) === true)
 				&& $tokens[($stackPtr - 1)]['line'] < $tokens[$stackPtr]['line']
