@@ -42,9 +42,13 @@ class Allman_Sniffs_WhiteSpace_TabOverSpaceSniff implements PHP_CodeSniffer_Snif
 	{
 		$tokens = $phpcsFile->getTokens();
 
-		$whitespace = $tokens[$stackPtr];
+		if ($tokens[$stackPtr]['content'] === "\n")
+		{
+			return;
+		}
 
-		if ($tokens[$stackPtr]['content'] === "\n" || ($stackPtr > 0 && $tokens[$stackPtr - 1]['content'] !== "\n"))
+		$previous = $stackPtr - 1;
+		if ($previous >= 0 && $tokens[$previous]['content'] !== "\n" && $tokens[$previous]['type'] !== 'T_COMMENT')
 		{
 			return;
 		}

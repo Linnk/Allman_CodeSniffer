@@ -43,7 +43,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 		$tokens = $phpcsFile->getTokens();
 
 		// Skip constructor and destructor.
-        $methodName      = $phpcsFile->getDeclarationName($stackPtr);
+		$methodName      = $phpcsFile->getDeclarationName($stackPtr);
 		$isSpecialMethod = ($methodName === '__construct' || $methodName === '__destruct');
 
 		$return = null;
@@ -79,7 +79,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			else
 			{
 				// Check return type (can be multiple, separated by '|').
-                $typeNames      = explode('|', $content);
+				$typeNames      = explode('|', $content);
 				$suggestedNames = array();
 				foreach ($typeNames as $i => $typeName)
 				{
@@ -106,13 +106,13 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 				}
 
 				// Support both a return type and a description. The return type
-                // is anything up to the first space.
-                $returnParts = explode(' ', $content, 2);
+				// is anything up to the first space.
+				$returnParts = explode(' ', $content, 2);
 				$returnType  = $returnParts[0];
 
 				// If the return type is void, make sure there is
-                // no return statement in the function.
-                if ($returnType === 'void')
+				// no return statement in the function.
+				if ($returnType === 'void')
 				{
 					if (isset($tokens[$stackPtr]['scope_closer']) === true)
 					{
@@ -136,8 +136,8 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 						if ($returnToken !== $endToken)
 						{
 							// If the function is not returning anything, just
-                            // exiting, then there is no problem.
-                            $semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
+							// exiting, then there is no problem.
+							$semicolon = $phpcsFile->findNext(T_WHITESPACE, ($returnToken + 1), null, true);
 							if ($tokens[$semicolon]['code'] !== T_SEMICOLON)
 							{
 								$error = 'Function return type is void, but function contains return statement';
@@ -149,8 +149,8 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 				elseif ($returnType !== 'mixed')
 				{
 					// If return type is not void, there needs to be a return statement
-                    // somewhere in the function that returns something.
-                    if (isset($tokens[$stackPtr]['scope_closer']) === true)
+					// somewhere in the function that returns something.
+					if (isset($tokens[$stackPtr]['scope_closer']) === true)
 					{
 						$endToken    = $tokens[$stackPtr]['scope_closer'];
 						$returnToken = $phpcsFile->findNext(array(T_RETURN, T_YIELD), $stackPtr, $endToken);
@@ -228,7 +228,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			else
 			{
 				// Any strings until the next tag belong to this comment.
-                if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true)
+				if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true)
 				{
 					$end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
 				}
@@ -246,7 +246,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 				}
 
 				// Starts with a capital letter and ends with a fullstop.
-                $firstChar = $comment{0};
+				$firstChar = $comment{0};
 				if (strtoupper($firstChar) !== $firstChar)
 				{
 					$error = '@throws tag comment must start with a capital letter';
@@ -340,7 +340,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 										);
 
 						// Any strings until the next tag belong to this comment.
-                        if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true)
+						if (isset($tokens[$commentStart]['comment_tags'][($pos + 1)]) === true)
 						{
 							$end = $tokens[$commentStart]['comment_tags'][($pos + 1)];
 						}
@@ -402,8 +402,8 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 		$foundParams = array();
 
 		// We want to use ... for all variable length arguments, so added
-        // this prefix to the variable name so comparisons are easier.
-        foreach ($realParams as $pos => $param)
+		// this prefix to the variable name so comparisons are easier.
+		foreach ($realParams as $pos => $param)
 		{
 			if ($param['variable_length'] === true)
 			{
@@ -414,13 +414,13 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 		foreach ($params as $pos => $param)
 		{
 			// If the type is empty, the whole line is empty.
-            if ($param['type'] === '')
+			if ($param['type'] === '')
 			{
 				continue;
 			}
 
 			// Check the param type value.
-            $typeNames = explode('|', $param['type']);
+			$typeNames = explode('|', $param['type']);
 			foreach ($typeNames as $typeName)
 			{
 				$suggestedName = PHP_CodeSniffer::suggestType($typeName);
@@ -458,7 +458,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 				elseif (count($typeNames) === 1)
 				{
 					// Check type hint for array and custom type.
-                    $suggestedTypeHint = '';
+					$suggestedTypeHint = '';
 					if (strpos($suggestedName, 'array') !== false || substr($suggestedName, -2) === '[]')
 					{
 						$suggestedTypeHint = 'array';
@@ -555,7 +555,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			$foundParams[] = $param['var'];
 
 			// Check number of spaces after the type.
-            $spaces = ($maxType - strlen($param['type']) + 1);
+			$spaces = ($maxType - strlen($param['type']) + 1);
 			if ($param['type_space'] !== $spaces)
 			{
 				$error = 'Expected %s spaces after parameter type; %s found';
@@ -577,7 +577,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 					$phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
 
 					// Fix up the indent of additional comment lines.
-                    foreach ($param['commentLines'] as $lineNum => $line)
+					foreach ($param['commentLines'] as $lineNum => $line)
 					{
 						if ($lineNum === 0
 							|| $param['commentLines'][$lineNum]['indent'] === 0
@@ -598,7 +598,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			}
 
 			// Make sure the param name is correct.
-            if (isset($realParams[$pos]) === true)
+			if (isset($realParams[$pos]) === true)
 			{
 				$realName = $realParams[$pos]['name'];
 				if ($realName !== $param['var'])
@@ -624,7 +624,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			elseif (substr($param['var'], -4) !== ',...')
 			{
 				// We must have an extra parameter comment.
-                $error = 'Superfluous parameter comment';
+				$error = 'Superfluous parameter comment';
 				$phpcsFile->addError($error, $param['tag'], 'ExtraParamComment');
 			}
 
@@ -634,7 +634,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			}
 
 			// Check number of spaces after the var name.
-            $spaces = ($maxVar - strlen($param['var']) + 1);
+			$spaces = ($maxVar - strlen($param['var']) + 1);
 			if ($param['var_space'] !== $spaces)
 			{
 				$error = 'Expected %s spaces after parameter name; %s found';
@@ -656,7 +656,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 					$phpcsFile->fixer->replaceToken(($param['tag'] + 2), $content);
 
 					// Fix up the indent of additional comment lines.
-                    foreach ($param['commentLines'] as $lineNum => $line)
+					foreach ($param['commentLines'] as $lineNum => $line)
 					{
 						if ($lineNum === 0
 							|| $param['commentLines'][$lineNum]['indent'] === 0
@@ -677,7 +677,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			}
 
 			// Param comments must start with a capital letter and end with the full stop.
-            if (preg_match('/^(\p{Ll}|\P{L})/u', $param['comment']) === 1)
+			if (preg_match('/^(\p{Ll}|\P{L})/u', $param['comment']) === 1)
 			{
 				$error = 'Parameter comment must start with a capital letter';
 				$phpcsFile->addError($error, $param['tag'], 'ParamCommentNotCapital');
@@ -698,7 +698,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 		}
 
 		// Report missing comments.
-        $diff = array_diff($realNames, $foundParams);
+		$diff = array_diff($realNames, $foundParams);
 		foreach ($diff as $neededParam)
 		{
 			$error = 'Doc comment for parameter "%s" missing';
