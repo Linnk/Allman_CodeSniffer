@@ -4,9 +4,9 @@
  *
  * PHP version 5
  *
- * @category  PHP
- * @package   Allman_CodeSniffer
- * @author    Juan I. Benavides
+ * @category PHP
+ * @package  Allman_CodeSniffer
+ * @author   Juan I. Benavides
  */
 
 if (class_exists('PEAR_Sniffs_Commenting_FunctionCommentSniff', true) === false)
