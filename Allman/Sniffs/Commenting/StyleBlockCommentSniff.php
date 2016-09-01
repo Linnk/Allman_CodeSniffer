@@ -59,8 +59,6 @@ class Allman_Sniffs_Commenting_StyleBlockCommentSniff implements PHP_CodeSniffer
 				str_replace(array("\n", "\t"), array('\n', '\t'), $base.' '),
 				str_replace(array("\n", "\t"), array('\n', '\t'), $raw),
 			);
-			print_r($tokens[$before]['type']);
-			print_r($tokens[$before]['content']);
 
 			if ($phpcsFile->addFixableError($error, $before, 'WrongBlockCommentIndent', $data))
 			{

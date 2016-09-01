@@ -21,23 +21,23 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 {
 
 	/**
-     * The current PHP version.
-     *
-     * @var integer
-     */
+	 * The current PHP version.
+	 *
+	 * @var integer
+	 */
 	private $_phpVersion = null;
 
 
 	/**
-     * Process the return comment of this function comment.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                  $stackPtr     The position of the current token
-     *                                           in the stack passed in $tokens.
-     * @param int                  $commentStart The position in the stack where the comment started.
-     *
-     * @return void
-     */
+	 * Process the return comment of this function comment.
+	 *
+	 * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+	 * @param int                  $stackPtr     The position of the current token
+	 *                                           in the stack passed in $tokens.
+	 * @param int                  $commentStart The position in the stack where the comment started.
+	 *
+	 * @return void
+	 */
 	protected function processReturn(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
 	{
 		$tokens = $phpcsFile->getTokens();
@@ -181,15 +181,15 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 
 
 	/**
-     * Process any throw tags that this function comment has.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                  $stackPtr     The position of the current token
-     *                                           in the stack passed in $tokens.
-     * @param int                  $commentStart The position in the stack where the comment started.
-     *
-     * @return void
-     */
+	 * Process any throw tags that this function comment has.
+	 *
+	 * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+	 * @param int                  $stackPtr     The position of the current token
+	 *                                           in the stack passed in $tokens.
+	 * @param int                  $commentStart The position in the stack where the comment started.
+	 *
+	 * @return void
+	 */
 	protected function processThrows(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
 	{
 		$tokens = $phpcsFile->getTokens();
@@ -265,15 +265,15 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 
 
 	/**
-     * Process the function parameter comments.
-     *
-     * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
-     * @param int                  $stackPtr     The position of the current token
-     *                                           in the stack passed in $tokens.
-     * @param int                  $commentStart The position in the stack where the comment started.
-     *
-     * @return void
-     */
+	 * Process the function parameter comments.
+	 *
+	 * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+	 * @param int                  $stackPtr     The position of the current token
+	 *                                           in the stack passed in $tokens.
+	 * @param int                  $commentStart The position in the stack where the comment started.
+	 *
+	 * @return void
+	 */
 	protected function processParams(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
 	{
 		if ($this->_phpVersion === null)
