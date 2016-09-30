@@ -70,4 +70,12 @@ Compose it:
 $ composer install
 ```
 
+Configure it:
+
+```
+$ vendor/bin/phpcs --config-set installed_paths /full/path/to/Allman_CodeSniffer/
+$ vendor/bin/phpcs --config-set default_standard Allman
+$ vendor/bin/phpcs --config-set report_width auto
+```
+
 That's it.
