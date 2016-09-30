@@ -448,11 +448,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 				{
 					// Check type hint for array and custom type.
 					$suggestedTypeHint = '';
-					if (strpos($suggestedName, 'array') !== false || substr($suggestedName, -2) === '[]')
-					{
-						$suggestedTypeHint = 'array';
-					}
-					elseif (strpos($suggestedName, 'callable') !== false)
+					if (strpos($suggestedName, 'callable') !== false)
 					{
 						$suggestedTypeHint = 'callable';
 					}
