@@ -114,11 +114,19 @@ class Allman_Sniffs_PHP_PHPInlineSniff implements PHP_CodeSniffer_Sniff
 
 			if (isset($tokens[$closeTag - 1]) && $tokens[$closeTag - 1]['content'] !== ' ')
 			{
-				$error = 'Expected whitespace before %s tag; "%s" found.';
+				$error = 'Expected a single whitespace before %s tag; "%s" found.';
 				$data = array(trim($tokens[$closeTag]['content']), $tokens[$closeTag - 1]['content']);
-				if ($phpcsFile->addFixableError($error, $closeTag, 'WhitespaceBeforeKeyword', $data))
+
+				if (trim($tokens[$closeTag - 1]['content']) === '')
 				{
-					$phpcsFile->fixer->addContentBefore($closeTag, ' ');
+					if ($phpcsFile->addFixableError($error, $closeTag - 1, 'WhitespaceBeforeKeyword', $data))
+					{
+						$phpcsFile->fixer->replaceToken($closeTag - 1, ' ');
+					}
+				}
+				else
+				{
+					$phpcsFile->addError($error, $closeTag - 1, 'WhitespaceBeforeKeyword', $data);
 				}
 			}
 		}
