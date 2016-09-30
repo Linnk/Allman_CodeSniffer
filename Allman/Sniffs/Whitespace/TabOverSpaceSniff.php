@@ -5,11 +5,6 @@
 class Allman_Sniffs_WhiteSpace_TabOverSpaceSniff implements PHP_CodeSniffer_Sniff
 {
 	/**
-	 * @var int Tab columns lenght.
-	 */
-	private $_tabWidth = null;
-
-	/**
 	 * A list of tokenizers this sniff supports.
 	 *
 	 * @var array

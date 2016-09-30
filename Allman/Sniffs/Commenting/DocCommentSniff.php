@@ -308,7 +308,11 @@ class Allman_Sniffs_Commenting_DocCommentSniff implements PHP_CodeSniffer_Sniff
 			$next    = $phpcsFile->findNext(T_DOC_COMMENT_TAG, ($lastTag + 3), $commentEnd);
 			if ($next !== false)
 			{
-				$prev = $phpcsFile->findPrevious(array(T_DOC_COMMENT_TAG, T_DOC_COMMENT_STRING), ($next - 1), $commentStart);
+				$prev = $phpcsFile->findPrevious(
+					array(T_DOC_COMMENT_TAG, T_DOC_COMMENT_STRING),
+					($next - 1),
+					$commentStart
+				);
 				if ($tokens[$next]['line'] !== ($tokens[$prev]['line'] + 2))
 				{
 					$error = 'There must be a single blank line after a tag group';

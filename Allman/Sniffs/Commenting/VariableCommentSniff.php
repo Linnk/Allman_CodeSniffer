@@ -1,7 +1,7 @@
 <?php
-/**
- * Parses and verifies the variable doc comment.
- */
+
+require_once dirname(dirname(dirname(__FILE__))).'/Utilities/Allman_CodeSniffer.php';
+
 if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === false)
 {
 	throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractVariableSniff not found');
@@ -129,8 +129,8 @@ class Allman_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSniffer_Stan
 		}
 
 		$varType       = $tokens[($foundVar + 2)]['content'];
-		$suggestedType = PHP_CodeSniffer::suggestType($varType);
-		if ($varType !== $suggestedType && $suggestedType !== 'boolean')
+		$suggestedType = Allman_CodeSniffer::suggestType($varType);
+		if ($varType !== $suggestedType)
 		{
 			$error = 'Expected "%s" but found "%s" for @var tag in member variable comment';
 			$data  = array(

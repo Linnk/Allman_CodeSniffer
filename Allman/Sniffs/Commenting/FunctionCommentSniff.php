@@ -1,13 +1,6 @@
 <?php
-/**
- * Boolean and integer exchange for bool and int.
- *
- * PHP version 5
- *
- * @category PHP
- * @package  Allman_CodeSniffer
- * @author   Juan I. Benavides
- */
+
+require_once dirname(dirname(dirname(__FILE__))).'/Utilities/Allman_CodeSniffer.php';
 
 if (class_exists('PEAR_Sniffs_Commenting_FunctionCommentSniff', true) === false)
 {
@@ -83,7 +76,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 				$suggestedNames = array();
 				foreach ($typeNames as $i => $typeName)
 				{
-					$suggestedName = PHP_CodeSniffer::suggestType($typeName);
+					$suggestedName = Allman_CodeSniffer::suggestType($typeName);
 					if (in_array($suggestedName, $suggestedNames) === false)
 					{
 						$suggestedNames[] = $suggestedName;
@@ -91,7 +84,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 				}
 
 				$suggestedType = implode('|', $suggestedNames);
-				if ($content !== $suggestedType)
+				if ($content !== $suggestedType && $suggestedType !== 'boolean')
 				{
 					$error = 'Expected "%s" but found "%s" for function return type';
 					$data  = array(
@@ -306,7 +299,11 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			if ($tokens[($tag + 2)]['code'] === T_DOC_COMMENT_STRING)
 			{
 				$matches = array();
-				preg_match('/([^$&.]+)(?:((?:\.\.\.)?(?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/', $tokens[($tag + 2)]['content'], $matches);
+				preg_match(
+					'/([^$&.]+)(?:((?:\.\.\.)?(?:\$|&)[^\s]+)(?:(\s+)(.*))?)?/',
+					$tokens[($tag + 2)]['content'],
+					$matches
+				);
 
 				if (empty($matches) === false)
 				{
@@ -423,15 +420,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 			$typeNames = explode('|', $param['type']);
 			foreach ($typeNames as $typeName)
 			{
-				$suggestedName = PHP_CodeSniffer::suggestType($typeName);
-				if ($suggestedName === 'boolean')
-				{
-					$suggestedName = 'bool';
-				}
-				if ($suggestedName === 'integer')
-				{
-					$suggestedName = 'int';
-				}
+				$suggestedName = Allman_CodeSniffer::suggestType($typeName);
 				if ($typeName !== $suggestedName)
 				{
 					$error = 'Expected "%s" but found "%s" for parameter type';
