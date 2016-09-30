@@ -24,6 +24,11 @@
 		<exclude-pattern>*/Allman/*</exclude-pattern>
 	</rule>
 
+	<rule ref="Generic.Files.LineLength">
+		<exclude-pattern>*.ctp</exclude-pattern>
+		<exclude-pattern>*.html</exclude-pattern>
+	</rule>
+
 	<rule ref="Generic.WhiteSpace.ScopeIndent">
 		<properties>
 			<property name="exact" value="false"/>
