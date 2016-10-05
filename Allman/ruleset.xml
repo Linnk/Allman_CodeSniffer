@@ -5,6 +5,10 @@
 	<!-- Use jscs instead. -->
 	<exclude-pattern>*.js</exclude-pattern>
 
+	<rule ref="Internal.NoCodeFound">
+		<severity>0</severity>
+	</rule>
+
 	<rule ref="PSR2">
 		<exclude name="PSR1.Classes.ClassDeclaration"/>
 		<exclude name="PSR1.Files.SideEffects"/>
