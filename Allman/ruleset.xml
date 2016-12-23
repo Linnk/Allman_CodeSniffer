@@ -28,6 +28,7 @@
 	</rule>
 
 	<rule ref="Squiz.Classes.ValidClassName">
+		<exclude-pattern>*/Config/*</exclude-pattern>
 		<exclude-pattern>*/Allman/*</exclude-pattern>
 	</rule>
 
