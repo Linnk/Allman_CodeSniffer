@@ -43,6 +43,7 @@
 			<property name="tabIndent" value="true"/>
 			<property name="indent" value="4"/>
 		</properties>
+		<exclude-pattern>*.ctp</exclude-pattern>
 	</rule>
 
 	<rule ref="Squiz.Commenting.ClassComment"/>
