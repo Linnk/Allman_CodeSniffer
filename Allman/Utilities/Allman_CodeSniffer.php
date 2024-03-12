@@ -1,4 +1,7 @@
 <?php
+
+namespace Allman\Utilities;
+
 /**
  * Allman CodeSniffer.
  *

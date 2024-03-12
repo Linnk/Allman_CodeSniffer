@@ -1,29 +1,28 @@
 <?php
 
-require_once dirname(dirname(dirname(__FILE__))).'/Utilities/Allman_CodeSniffer.php';
+namespace PHP_CodeSniffer\Standards\Allman\Sniffs\Commenting;
 
-if (class_exists('PHP_CodeSniffer_Standards_AbstractVariableSniff', true) === false)
-{
-	throw new PHP_CodeSniffer_Exception('Class PHP_CodeSniffer_Standards_AbstractVariableSniff not found');
-}
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
+use Allman\Utilities\Allman_CodeSniffer;
 
 /**
  * Parses and verifies the variable doc comment.
  */
-class Allman_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSniffer_Standards_AbstractVariableSniff
+class Allman_Sniffs_Commenting_VariableCommentSniff extends AbstractVariableSniff
 {
-
-
 	/**
 	 * Called to process class member vars.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+	 * @param File $phpcsFile The file being scanned.
 	 * @param int                  $stackPtr  The position of the current token
 	 *                                        in the stack passed in $tokens.
 	 *
 	 * @return void
 	 */
-	public function processMemberVar(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+	public function processMemberVar(File $phpcsFile, $stackPtr)
 	{
 		$tokens       = $phpcsFile->getTokens();
 		$commentToken = array(
@@ -146,13 +145,13 @@ class Allman_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSniffer_Stan
 	 *
 	 * Not required for this sniff.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile The PHP_CodeSniffer file where this token was found.
+	 * @param File $phpcsFile The PHP_CodeSniffer file where this token was found.
 	 * @param int                  $stackPtr  The position where the double quoted
 	 *                                        string was found.
 	 *
 	 * @return void
 	 */
-	protected function processVariable(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+	protected function processVariable(File $phpcsFile, $stackPtr)
 	{
 	}
 
@@ -161,13 +160,13 @@ class Allman_Sniffs_Commenting_VariableCommentSniff extends PHP_CodeSniffer_Stan
 	 *
 	 * Not required for this sniff.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile The PHP_CodeSniffer file where this token was found.
+	 * @param File $phpcsFile The PHP_CodeSniffer file where this token was found.
 	 * @param int                  $stackPtr  The position where the double quoted
 	 *                                        string was found.
 	 *
 	 * @return void
 	 */
-	protected function processVariableInString(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+	protected function processVariableInString(File $phpcsFile, $stackPtr)
 	{
 	}
 }

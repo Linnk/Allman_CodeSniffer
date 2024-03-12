@@ -15,11 +15,17 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+namespace PHP_CodeSniffer\Standards\CakePHP\Sniffs\Files;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Ensures no whitespaces and one whitespace is placed around each comma
  *
  */
-class CakePHP_Sniffs_WhiteSpace_CommaSpacingSniff implements PHP_CodeSniffer_Sniff
+class CakePHP_Sniffs_WhiteSpace_CommaSpacingSniff implements Sniff
 {
 
 /**
@@ -35,12 +41,12 @@ class CakePHP_Sniffs_WhiteSpace_CommaSpacingSniff implements PHP_CodeSniffer_Sni
 /**
  * Processes this test, when one of its tokens is encountered.
  *
- * @param PHP_CodeSniffer_File $phpcsFile All the tokens found in the document.
+ * @param File $phpcsFile All the tokens found in the document.
  * @param integer $stackPtr The position of the current token
  *    in the stack passed in $tokens.
  * @return void
  */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 

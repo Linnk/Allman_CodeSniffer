@@ -15,6 +15,12 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+namespace PHP_CodeSniffer\Standards\CakePHP\Sniffs\Files;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Ensures method names are correct depending on whether they are public
  * or private, and that functions are named correctly.
@@ -57,12 +63,12 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 /**
  * Processes the tokens within the scope.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
+ * @param File $phpcsFile The file being processed.
  * @param integer $stackPtr The position where this token was found.
  * @param integer $currScope The position of the current scope.
  * @return void
  */
-    protected function processTokenWithinScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $currScope)
+    protected function processTokenWithinScope(File $phpcsFile, $stackPtr, $currScope)
     {
         $methodName = $phpcsFile->getDeclarationName($stackPtr);
         if ($methodName === null) {
@@ -127,11 +133,11 @@ class CakePHP_Sniffs_NamingConventions_ValidFunctionNameSniff extends PHP_CodeSn
 /**
  * Processes the tokens outside the scope.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file being processed.
+ * @param File $phpcsFile The file being processed.
  * @param integer $stackPtr  The position where this token was found.
  * @return void
  */
-    protected function processTokenOutsideScope(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {
     }
 }

@@ -15,11 +15,16 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+namespace PHP_CodeSniffer\Standards\CakePHP\Sniffs\Files;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
 /**
  * Ensures there is a space after the function keyword for closures.
  *
  */
-class CakePHP_Sniffs_Functions_ClosureDeclarationSniff implements PHP_CodeSniffer_Sniff
+class CakePHP_Sniffs_Functions_ClosureDeclarationSniff implements Sniff
 {
 
     public function register()
@@ -27,7 +32,7 @@ class CakePHP_Sniffs_Functions_ClosureDeclarationSniff implements PHP_CodeSniffe
         return array(T_CLOSURE);
     }
 
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $spaces = 0;
