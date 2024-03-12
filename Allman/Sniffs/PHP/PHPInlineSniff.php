@@ -89,7 +89,7 @@ class Allman_Sniffs_PHP_PHPInlineSniff implements Sniff
 			if (strpos($php_code, PHP_EOL) !== false)
 			{
 				$error = 'Not expected a newline between <?php ... ?>';
-				$phpcsFile->addError($error, $stackPtr);
+				$phpcsFile->addError($error, $stackPtr, 'Found');
 			}
 
 			$semicolon = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
@@ -114,7 +114,7 @@ class Allman_Sniffs_PHP_PHPInlineSniff implements Sniff
 				}
 				else
 				{
-					$phpcsFile->addError($error, $semicolon);
+					$phpcsFile->addError($error, $semicolon, 'Found');
 				}
 			}
 

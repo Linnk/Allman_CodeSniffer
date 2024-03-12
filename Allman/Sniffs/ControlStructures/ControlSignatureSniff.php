@@ -158,7 +158,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements Sniff
 							$phpcsFile->fixer->replaceToken($closer, '');
 						}
 					}
-					elseif ($phpcsFile->addError('Expected “:” right after closing parenthesis', $closer))
+					elseif ($phpcsFile->addError('Expected “:” right after closing parenthesis', $closer, 'Found'))
 					{
 						$phpcsFile->fixer->addContent($closer, "\n");
 					}
