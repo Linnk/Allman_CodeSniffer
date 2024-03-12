@@ -1,5 +1,5 @@
 {
-    "name": "adrian0350/allman-codesniffer",
+    "name": "linnk/allman-codesniffer",
     "description": "Allman CodeSniffer & Linnk Standards",
     "type": "library",
     "keywords": ["framework", "codesniffer"],
@@ -12,7 +12,7 @@
         },
         {
             "name": "Adrián Zúñiga",
-            "homepage": "https://github.com/adrian0350/allman-codesniffer"
+            "homepage": "https://github.com/linnk/allman-codesniffer"
         }
     ],
     "require": {
