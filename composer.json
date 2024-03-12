@@ -9,6 +9,10 @@
         {
             "name": "Juan I. Benavides",
             "homepage": "https://github.com/linnk/allman-codesniffer"
+        },
+        {
+            "name": "Adrián Zúñiga",
+            "homepage": "https://github.com/adrian0350/allman-codesniffer"
         }
     ],
     "require": {
