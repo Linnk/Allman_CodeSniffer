@@ -12,10 +12,16 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
+namespace PHP_CodeSniffer\Standards\Allman\Sniffs\Files;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Verifies that control statements conform to their coding standards.
  */
-class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeSniffer_Sniff
+class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements Sniff
 {
 
 	/**
@@ -49,13 +55,13 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 	/**
 	 * Processes this test, when one of its tokens is encountered.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+	 * @param File $phpcsFile The file being scanned.
 	 * @param int                  $stackPtr  The position of the current token in the
 	 *                                        stack passed in $tokens.
 	 *
 	 * @return void
 	 */
-	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+	public function process(File $phpcsFile, $stackPtr)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -152,7 +158,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 							$phpcsFile->fixer->replaceToken($closer, '');
 						}
 					}
-					elseif ($phpcsFile->addError('Expected “:” right after closing parenthesis', $closer))
+					elseif ($phpcsFile->addError('Expected “:” right after closing parenthesis', $closer, 'Found'))
 					{
 						$phpcsFile->fixer->addContent($closer, "\n");
 					}
@@ -190,7 +196,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 
 				// Skip all empty tokens on the same line as the opener.
 				if ($tokens[$next]['line'] === $tokens[$opener]['line']
-						&& (isset(PHP_CodeSniffer_Tokens::$emptyTokens[$code]) === true
+						&& (isset(Tokens::$emptyTokens[$code]) === true
 						|| $code === T_CLOSE_TAG)
 						)
 				{
@@ -269,7 +275,7 @@ class Allman_Sniffs_ControlStructures_ControlSignatureSniff implements PHP_CodeS
 			$tokens[$stackPtr]['code'] === T_CATCH
 		)
 		{
-			$closer = $phpcsFile->findPrevious(PHP_CodeSniffer_Tokens::$emptyTokens, ($stackPtr - 1), null, true);
+			$closer = $phpcsFile->findPrevious(Tokens::$emptyTokens, ($stackPtr - 1), null, true);
 			if ($closer === false || $tokens[$closer]['code'] !== T_CLOSE_CURLY_BRACKET)
 			{
 				return;

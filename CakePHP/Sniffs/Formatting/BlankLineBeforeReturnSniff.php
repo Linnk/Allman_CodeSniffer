@@ -1,4 +1,11 @@
 <?php
+
+namespace PHP_CodeSniffer\Standards\CakePHP\Sniffs\Files;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Throws errors if there's no blank line before return statements.
  *
@@ -6,7 +13,7 @@
  * @license  http://spdx.org/licenses/MIT MIT License
  * @link     https://github.com/escapestudios/Symfony2-coding-standard
  */
-class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSniffer_Sniff
+class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements Sniff
 {
     /**
      * A list of tokenizers this sniff supports.
@@ -31,13 +38,13 @@ class CakePHP_Sniffs_Formatting_BlankLineBeforeReturnSniff implements PHP_CodeSn
     /**
      * Processes this test, when one of its tokens is encountered.
      *
-     * @param PHP_CodeSniffer_File $phpcsFile All the tokens found in the document.
+     * @param File $phpcsFile All the tokens found in the document.
      * @param int                  $stackPtr  The position of the current token in
      *                                        the stack passed in $tokens.
      *
      * @return void
      */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens          = $phpcsFile->getTokens();
         $current         = $stackPtr;

@@ -1,16 +1,19 @@
 <?php
 
-require_once dirname(dirname(dirname(__FILE__))).'/Utilities/Allman_CodeSniffer.php';
+namespace PHP_CodeSniffer\Standards\Allman\Sniffs\Commenting;
 
-if (class_exists('PEAR_Sniffs_Commenting_FunctionCommentSniff', true) === false)
-{
-	throw new PHP_CodeSniffer_Exception('Class PEAR_Sniffs_Commenting_FunctionCommentSniff not found');
-}
+use PHP_CodeSniffer\Config;
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+use PHP_CodeSniffer\Util\Common;
+use PHP_CodeSniffer\Standards\PEAR\Sniffs\Commenting\FunctionCommentSniff;
+use Allman\Utilities\Allman_CodeSniffer;
 
 /**
  * Parses and verifies the doc comments for functions.
  */
-class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenting_FunctionCommentSniff
+class Allman_Sniffs_Commenting_FunctionCommentSniff extends FunctionCommentSniff
 {
 
 	/**
@@ -24,14 +27,14 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 	/**
 	 * Process the return comment of this function comment.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+	 * @param File $phpcsFile    The file being scanned.
 	 * @param int                  $stackPtr     The position of the current token
 	 *                                           in the stack passed in $tokens.
 	 * @param int                  $commentStart The position in the stack where the comment started.
 	 *
 	 * @return void
 	 */
-	protected function processReturn(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+	protected function processReturn(File $phpcsFile, $stackPtr, $commentStart)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -176,14 +179,14 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 	/**
 	 * Process any throw tags that this function comment has.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+	 * @param File $phpcsFile    The file being scanned.
 	 * @param int                  $stackPtr     The position of the current token
 	 *                                           in the stack passed in $tokens.
 	 * @param int                  $commentStart The position in the stack where the comment started.
 	 *
 	 * @return void
 	 */
-	protected function processThrows(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+	protected function processThrows(File $phpcsFile, $stackPtr, $commentStart)
 	{
 		$tokens = $phpcsFile->getTokens();
 
@@ -239,7 +242,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 				}
 
 				// Starts with a capital letter and ends with a fullstop.
-				$firstChar = $comment{0};
+				$firstChar = $comment[0];
 				if (strtoupper($firstChar) !== $firstChar)
 				{
 					$error = '@throws tag comment must start with a capital letter';
@@ -260,18 +263,18 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 	/**
 	 * Process the function parameter comments.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile    The file being scanned.
+	 * @param File $phpcsFile    The file being scanned.
 	 * @param int                  $stackPtr     The position of the current token
 	 *                                           in the stack passed in $tokens.
 	 * @param int                  $commentStart The position in the stack where the comment started.
 	 *
 	 * @return void
 	 */
-	protected function processParams(PHP_CodeSniffer_File $phpcsFile, $stackPtr, $commentStart)
+	protected function processParams(File $phpcsFile, $stackPtr, $commentStart)
 	{
 		if ($this->_phpVersion === null)
 		{
-			$this->_phpVersion = PHP_CodeSniffer::getConfigData('php_version');
+			$this->_phpVersion = Config::getConfigData('php_version');
 			if ($this->_phpVersion === null)
 			{
 				$this->_phpVersion = PHP_VERSION_ID;
@@ -456,7 +459,7 @@ class Allman_Sniffs_Commenting_FunctionCommentSniff extends PEAR_Sniffs_Commenti
 					{
 						$suggestedTypeHint = 'callable';
 					}
-					elseif (in_array($typeName, PHP_CodeSniffer::$allowedTypes) === false)
+					elseif (in_array($typeName, Common::$allowedTypes) === false)
 					{
 						$suggestedTypeHint = $suggestedName;
 					}

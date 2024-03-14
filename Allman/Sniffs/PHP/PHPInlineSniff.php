@@ -12,11 +12,17 @@
  * @link      http://pear.php.net/package/PHP_CodeSniffer
  */
 
+namespace PHP_CodeSniffer\Standards\Allman\Sniffs\Files;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Checks that code inside inline-PHP tags has proper spacing and do
  * not contains semicolons.
  */
-class Allman_Sniffs_PHP_PHPInlineSniff implements PHP_CodeSniffer_Sniff
+class Allman_Sniffs_PHP_PHPInlineSniff implements Sniff
 {
 	/**
 	 * If TRUE, inline PHP code can contain semicolons.
@@ -38,13 +44,13 @@ class Allman_Sniffs_PHP_PHPInlineSniff implements PHP_CodeSniffer_Sniff
 	/**
 	 * Processes this sniff, when one of its tokens is encountered.
 	 *
-	 * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+	 * @param File $phpcsFile The file being scanned.
 	 * @param int                  $stackPtr  The position of the current token in
 	 *                                        the stack passed in $tokens.
 	 *
 	 * @return void
 	 */
-	public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+	public function process(File $phpcsFile, $stackPtr)
 	{
 		$tokens = $phpcsFile->getTokens();
 		$closeTag = $phpcsFile->findNext(T_CLOSE_TAG, $stackPtr);
@@ -83,7 +89,7 @@ class Allman_Sniffs_PHP_PHPInlineSniff implements PHP_CodeSniffer_Sniff
 			if (strpos($php_code, PHP_EOL) !== false)
 			{
 				$error = 'Not expected a newline between <?php ... ?>';
-				$phpcsFile->addError($error, $stackPtr);
+				$phpcsFile->addError($error, $stackPtr, 'Found');
 			}
 
 			$semicolon = $phpcsFile->findNext(T_SEMICOLON, $stackPtr);
@@ -108,7 +114,7 @@ class Allman_Sniffs_PHP_PHPInlineSniff implements PHP_CodeSniffer_Sniff
 				}
 				else
 				{
-					$phpcsFile->addError($error, $semicolon);
+					$phpcsFile->addError($error, $semicolon, 'Found');
 				}
 			}
 

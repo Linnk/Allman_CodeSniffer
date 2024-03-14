@@ -15,13 +15,19 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+namespace PHP_CodeSniffer\Standards\CakePHP\Sniffs\Files;
+
+use PHP_CodeSniffer\Files\File;
+use PHP_CodeSniffer\Sniffs\Sniff;
+use PHP_CodeSniffer\Util\Tokens;
+
 /**
  * Disallow short open tags
  *
  * But permit short-open echo tags (<?=) [T_OPEN_TAG_WITH_ECHO] as they are part of PHP 5.4+
  *
  */
-class CakePHP_Sniffs_PHP_DisallowShortOpenTagSniff implements PHP_CodeSniffer_Sniff
+class CakePHP_Sniffs_PHP_DisallowShortOpenTagSniff implements Sniff
 {
 
 /**
@@ -43,13 +49,13 @@ class CakePHP_Sniffs_PHP_DisallowShortOpenTagSniff implements PHP_CodeSniffer_Sn
 /**
  * Processes this test, when one of its tokens is encountered.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+ * @param File $phpcsFile The file being scanned.
  * @param integer              $stackPtr  The position of the current token in the
  *                             stack passed in $tokens.
  *
  * @return void
  */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
         $openTag = $tokens[$stackPtr];

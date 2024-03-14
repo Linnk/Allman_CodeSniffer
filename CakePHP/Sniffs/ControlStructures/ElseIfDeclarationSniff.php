@@ -19,7 +19,7 @@
  * Ensures that elseif is used instead of else if
  *
  */
-class CakePHP_Sniffs_ControlStructures_ElseIfDeclarationSniff implements PHP_CodeSniffer_Sniff
+class CakePHP_Sniffs_ControlStructures_ElseIfDeclarationSniff implements Sniff
 {
 
 /**
@@ -37,12 +37,12 @@ class CakePHP_Sniffs_ControlStructures_ElseIfDeclarationSniff implements PHP_Cod
  *
  * Checks that ELSEIF is used instead of ELSE IF.
  *
- * @param PHP_CodeSniffer_File $phpcsFile The file being scanned.
+ * @param File $phpcsFile The file being scanned.
  * @param integer              $stackPtr  The position of the current token in the
  *                                        stack passed in $tokens.
  * @return void
  */
-    public function process(PHP_CodeSniffer_File $phpcsFile, $stackPtr)
+    public function process(File $phpcsFile, $stackPtr)
     {
         $tokens = $phpcsFile->getTokens();
 
