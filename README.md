@@ -21,8 +21,8 @@ composer require linnk/allman-codesniffer
 Configuring Allman standard, you will need to add the whole path because it depends of the CakePHP standard in the repository:
 
 ```
-composer/bin/phpcs --config-set installed_paths vendor/linnk/allman-codesniffer/
-composer/bin/phpcs --config-set default_standard Allman
+vendor/bin/phpcs --config-set installed_paths vendor/linnk/allman-codesniffer/
+vendor/bin/phpcs --config-set default_standard Allman
 ```
 
 Usage:
