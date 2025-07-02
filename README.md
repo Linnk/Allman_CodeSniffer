@@ -1,81 +1,85 @@
 # Allman CodeSniffer
 
-This is kind of a continuation from my previous fixer [PHP_Allman](https://github.com/Linnk/PHP-Allman), but this time is based on [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer), which is more powerful and flexible in my opinion.
+This is a continuation of my previous fixer [PHP_Allman](https://github.com/Linnk/PHP-Allman), this time based on [PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer), which is proven to be more powerful and flexible in the long run.
 
-The principles are the same, tho:
+The principles are the same for this standard:
 
 1. I believe in [Allman indent style](https://en.wikipedia.org/wiki/Indent_style#Allman_style).
 2. I believe in tabs instead of spaces.
 
-The good thing now, is that if you don't like one of those you can customize it easier.
-
-
-## Install
-
-Using composer:
+Example:
 
 ```
+while (x == y)
+{
+	something();
+	something_else();
+
+	if (true)
+	{
+		one_more();
+	}
+}
+
+final_thing();
+```
+
+## Installation
+
+Using composer in your projects:
+
+```bash
+# Require PHP_CodeSniffer and this Allman_CodeSniffer (standard)
+composer require squizlabs/php_codesniffer
 composer require linnk/allman-codesniffer
-```
 
-Configuring Allman standard, you will need to add the whole path because it depends of the CakePHP standard in the repository:
-
-```
+# Add Allman standard to install_paths
 vendor/bin/phpcs --config-set installed_paths vendor/linnk/allman-codesniffer/
+
+# Set Allman as default :)
 vendor/bin/phpcs --config-set default_standard Allman
+
+# Verifying
+vendor/bin/phpcs -e
 ```
 
-Usage:
+## How to use:
 
-```
+```bash
 $ composer/bin/phpcs path/to/your/code
 ```
 
+**Global installation** for general purposes:
 
-## Global install
-
-Using composer:
-
-```
+```bash
+# Global installation
+composer global require squizlabs/php_codesniffer
 composer global require linnk/allman-codesniffer
-```
 
-Make sure you have ~/.composer/composer/bin/ in your PATH, so you can run **phpcs** and **phpcbf** as a command line. Then, configure the Allman standard:
+# Set `phpcs` and `phpcbf` in PATH
+export PATH="$PATH:$HOME/.composer/vendor/bin"
 
-```
+# Set installed_paths
 phpcs --config-set installed_paths ~/.composer/vendor/linnk/allman-codesniffer/
+
+# Set Allman as default
 phpcs --config-set default_standard Allman
 ```
 
-If everything is ok, you can check it “explaining” the default_standard:
+## Contributing
 
-```
-phpcs -e
-```
-
-You should see the Allman standard definition at the beginning.
-
-
-## Development
-
-Clone it:
-
-```
+```bash
+# Clone repo
 $ git clone https://github.com/Linnk/Allman_CodeSniffer.git
-```
 
-Compose it:
-
-```
+# Installation
 $ composer install
-```
 
-Configure it:
-
-```
+# Configuration
 $ composer/bin/phpcs --config-set installed_paths /full/path/to/Allman_CodeSniffer/
 $ composer/bin/phpcs --config-set default_standard Allman
 $ composer/bin/phpcs --config-set report_width auto
 ```
+**Notice**: ^ Our composer folder here is `composer` instead of `vendor`. The irony of following standards.
 
-That's it.
+TO-DO: Add instructions for podman container
