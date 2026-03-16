@@ -1,7 +1,7 @@
 {
     "name": "linnk/allman-codesniffer",
     "description": "Allman CodeSniffer & Linnk Standards",
-    "type": "library",
+    "type": "phpcodesniffer-standard",
     "keywords": ["framework", "codesniffer"],
     "homepage": "http://lionwriter.com",
     "license": "MIT",
